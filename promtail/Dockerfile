@@ -1,7 +1,7 @@
 ARG BUILD_FROM=amd64/debian:buster-20210329-slim
 
 # https://github.com/grafana/loki/releases
-FROM golang:1.16.3-buster
+FROM golang:1.16.3-buster as build
 ENV LOKI_VERSION 2.2.1
 
 # Must build binary from source on system with journal support. Published binaries on release do not include this.
