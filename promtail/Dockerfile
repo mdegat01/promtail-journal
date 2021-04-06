@@ -1,10 +1,13 @@
+# https://hub.docker.com/_/debian
 ARG BUILD_FROM=amd64/debian:buster-20210329-slim
 
-# https://github.com/grafana/loki/releases
+# https://hub.docker.com/_/golang
 FROM golang:1.16.3-buster as build
+# https://github.com/grafana/loki/releases
 ENV LOKI_VERSION 2.2.1
 
 # Must build binary from source on system with journal support. Published binaries on release do not include this.
+# https://packages.debian.org/buster/libsystemd-dev
 RUN set -eux; \
     echo "deb http://deb.debian.org/debian buster-backports main" >> /etc/apt/sources.list; \
     apt-get update; \
