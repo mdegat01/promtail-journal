@@ -15,10 +15,12 @@ RUN set -eux; \
         -t buster-backports \
         libsystemd-dev=247.3-3~bpo10+1 \
         ; \
-    curl -J -L -o /tmp/loki.tar.gz "https://github.com/grafana/loki/archive/refs/tags/v${LOKI_VERSION}.tar.gz"; \
+    curl -J -L -o /tmp/loki.tar.gz \
+        "https://github.com/grafana/loki/archive/refs/tags/v${LOKI_VERSION}.tar.gz"; \
     mkdir -p /src; \
     tar -xf /tmp/loki.tar.gz -C /src; \
-    mv "/src/loki-${LOKI_VERSION}" /src/loki;
+    mv "/src/loki-${LOKI_VERSION}" /src/loki; \
+    rm /tmp/loki.tar.gz;
 
 WORKDIR /src/loki
 RUN make BUILD_IN_CONTAINER=false promtail
@@ -27,7 +29,6 @@ RUN make BUILD_IN_CONTAINER=false promtail
 FROM ${BUILD_FROM}
 
 COPY --from=build /src/loki/cmd/promtail/promtail /usr/bin/promtail
-
 RUN promtail --version
 
 # Build arguments
