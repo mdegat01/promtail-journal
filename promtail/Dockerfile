@@ -1,6 +1,3 @@
-# https://hub.docker.com/_/debian
-ARG BUILD_FROM=amd64/debian:buster-20210329-slim
-
 # https://hub.docker.com/_/golang
 FROM golang:1.16.3-buster as build
 # https://github.com/grafana/loki/releases
@@ -25,8 +22,8 @@ RUN set -eux; \
 WORKDIR /src/loki
 RUN make BUILD_IN_CONTAINER=false promtail
 
-# hadolint ignore=DL3006
-FROM ${BUILD_FROM}
+# https://hub.docker.com/_/debian
+FROM debian:buster-20210329-slim
 
 COPY --from=build /src/loki/cmd/promtail/promtail /usr/bin/promtail
 RUN promtail --version
