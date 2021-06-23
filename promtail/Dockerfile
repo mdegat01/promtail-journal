@@ -10,7 +10,7 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -qy --no-install-recommends \ 
         -t buster-backports \
-        libsystemd-dev=247.3-5~bpo10+1 \
+        libsystemd-dev=247.3-5~bpo10+2 \
         ; \
     curl -J -L -o /tmp/loki.tar.gz \
         "https://github.com/grafana/loki/archive/refs/tags/v${LOKI_VERSION}.tar.gz"; \
