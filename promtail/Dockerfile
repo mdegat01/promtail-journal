@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/golang
-FROM golang:1.16.5-buster as build
+FROM golang:1.17beta1-buster as build
 # https://github.com/grafana/loki/releases
 ENV LOKI_VERSION 2.2.1
 
