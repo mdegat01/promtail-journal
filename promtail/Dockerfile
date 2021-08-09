@@ -1,7 +1,7 @@
 # https://hub.docker.com/_/golang
 FROM golang:1.16.7-buster as build
 # https://github.com/grafana/loki/releases
-ENV LOKI_VERSION 2.2.1
+ENV LOKI_VERSION 2.3.0
 
 # Must build binary from source on system with journal support. Published binaries on release do not include this.
 # https://packages.debian.org/buster/libsystemd-dev
@@ -25,7 +25,7 @@ RUN make BUILD_IN_CONTAINER=false promtail
 # https://hub.docker.com/_/debian
 FROM debian:buster-20210721-slim
 
-COPY --from=build /src/loki/cmd/promtail/promtail /usr/bin/promtail
+COPY --from=build /src/loki/clients/cmd/promtail/promtail /usr/bin/promtail
 RUN promtail --version
 
 # Build arguments
