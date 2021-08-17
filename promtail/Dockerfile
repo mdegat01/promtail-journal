@@ -23,7 +23,7 @@ WORKDIR /src/loki
 RUN make BUILD_IN_CONTAINER=false promtail
 
 # https://hub.docker.com/_/debian
-FROM debian:buster-20210721-slim
+FROM debian:buster-20210816-slim
 
 COPY --from=build /src/loki/clients/cmd/promtail/promtail /usr/bin/promtail
 RUN promtail --version
