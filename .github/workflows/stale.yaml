@@ -1,14 +1,14 @@
 ---
-name: Sync labels
+name: Stale
 
 # yamllint disable-line rule:truthy
 on:
   schedule:
-    - cron: "34 5 * * *"
+    - cron: "0 8 * * *"
   workflow_dispatch:
 
 jobs:
   workflows:
-    uses: mdegat01/addon-workflows/.github/workflows/labels.yaml@main
+    uses: mdegat01/addon-workflows/.github/workflows/stale.yaml@main
     secrets:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
