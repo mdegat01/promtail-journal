@@ -1,0 +1,11 @@
+---
+name: Promtail (Journal)
+version: dev
+slug: promtail-journal
+description: Basic debian image with promtail binary built with journal support
+url: https://github.com/mdegat01/promtail-journal
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
