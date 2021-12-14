@@ -12,4 +12,3 @@ jobs:
     uses: mdegat01/addon-workflows/.github/workflows/base-deploy.yaml@main
     secrets:
       GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
