@@ -1,7 +1,7 @@
 # https://hub.docker.com/_/golang
 FROM golang:1.17.6-bullseye as build
 # https://github.com/grafana/loki/releases
-ENV LOKI_VERSION 2.4.1
+ENV LOKI_VERSION 2.4.2
 
 # Must build binary from source on system with journal support. Published binaries on release do not include this.
 # https://packages.debian.org/buster/libsystemd-dev
