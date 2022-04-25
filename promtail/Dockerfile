@@ -8,7 +8,7 @@ ENV LOKI_VERSION 2.4.2
 RUN set -eux; \
     apt-get update; \
     apt-get install -qy --no-install-recommends \ 
-        libsystemd-dev=247.3-6 \
+        libsystemd-dev=247.3-7 \
         ; \
     curl -J -L -o /tmp/loki.tar.gz \
         "https://github.com/grafana/loki/archive/refs/tags/v${LOKI_VERSION}.tar.gz"; \
