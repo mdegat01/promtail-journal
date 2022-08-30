@@ -18,7 +18,7 @@ RUN set -eux; \
 # https://hub.docker.com/_/debian
 FROM debian:bullseye-20220822-slim
 
-COPY --from=build /usr/src/loki/clients/cmd/promtail/promtail /usr/bin/promtail
+COPY --from=build /usr/src/loki/promtail /usr/bin/promtail
 RUN promtail --version
 
 # Build arguments
