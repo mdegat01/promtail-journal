@@ -13,7 +13,7 @@ RUN set -eux; \
         libsystemd-dev=247.3-7 \
         ; \
     git clone --depth 1 -b "v${LOKI_VERSION}" https://github.com/grafana/loki .; \
-    make BUILD_IN_CONTAINER=false promtail;
+    go build ./clients/cmd/promtail;
 
 # https://hub.docker.com/_/debian
 FROM debian:bullseye-20220822-slim
