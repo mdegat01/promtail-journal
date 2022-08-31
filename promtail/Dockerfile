@@ -1,7 +1,9 @@
 # https://hub.docker.com/_/golang
-FROM golang:1.17.9-bullseye as build
+FROM golang:1.18.5-bullseye as build
 # https://github.com/grafana/loki/releases
-ENV LOKI_VERSION 2.5.0
+ENV LOKI_VERSION 2.6.1
+
+WORKDIR /usr/src/loki
 
 # Must build binary from source on system with journal support. Published binaries on release do not include this.
 # https://packages.debian.org/buster/libsystemd-dev
@@ -10,20 +12,14 @@ RUN set -eux; \
     apt-get install -qy --no-install-recommends \ 
         libsystemd-dev=247.3-7 \
         ; \
-    curl -J -L -o /tmp/loki.tar.gz \
-        "https://github.com/grafana/loki/archive/refs/tags/v${LOKI_VERSION}.tar.gz"; \
-    mkdir -p /src; \
-    tar -xf /tmp/loki.tar.gz -C /src; \
-    mv "/src/loki-${LOKI_VERSION}" /src/loki; \
-    rm /tmp/loki.tar.gz;
-
-WORKDIR /src/loki
-RUN make BUILD_IN_CONTAINER=false promtail
+    git clone --depth 1 -b "v${LOKI_VERSION}" https://github.com/grafana/loki .; \
+    make clean; \
+    make BUILD_IN_CONTAINER=false promtail
 
 # https://hub.docker.com/_/debian
 FROM debian:bullseye-20220822-slim
 
-COPY --from=build /src/loki/clients/cmd/promtail/promtail /usr/bin/promtail
+COPY --from=build /usr/src/loki/clients/cmd/promtail/promtail /usr/bin/promtail
 RUN promtail --version
 
 # Build arguments
