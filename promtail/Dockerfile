@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/golang
-FROM golang:1.19.0-bullseye as build
+FROM golang:1.18.5-bullseye as build
 # https://github.com/grafana/loki/releases
 ENV LOKI_VERSION 2.6.1
 
@@ -13,7 +13,8 @@ RUN set -eux; \
         libsystemd-dev=247.3-7 \
         ; \
     git clone --depth 1 -b "v${LOKI_VERSION}" https://github.com/grafana/loki .; \
-    go build ./clients/cmd/promtail;
+    make clean; \
+    make BUILD_IN_CONTAINER=false promtail
 
 # https://hub.docker.com/_/debian
 FROM debian:bullseye-20220822-slim
