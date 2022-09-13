@@ -17,7 +17,7 @@ RUN set -eux; \
     make BUILD_IN_CONTAINER=false promtail
 
 # https://hub.docker.com/_/debian
-FROM debian:bullseye-20220822-slim
+FROM debian:bullseye-20220912-slim
 
 COPY --from=build /usr/src/loki/clients/cmd/promtail/promtail /usr/bin/promtail
 RUN promtail --version
