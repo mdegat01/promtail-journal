@@ -10,14 +10,14 @@ WORKDIR /usr/src/loki
 RUN set -eux; \
     apt-get update; \
     apt-get install -qy --no-install-recommends \ 
-        libsystemd-dev=247.3-7 \
+    libsystemd-dev=247.3-7+deb11u1 \
         ; \
     git clone --depth 1 -b "v${LOKI_VERSION}" https://github.com/grafana/loki .; \
     make clean; \
     make BUILD_IN_CONTAINER=false promtail
 
 # https://hub.docker.com/_/debian
-FROM debian:bullseye-20220822-slim
+FROM debian:bullseye-20221114-slim
 
 COPY --from=build /usr/src/loki/clients/cmd/promtail/promtail /usr/bin/promtail
 RUN promtail --version
