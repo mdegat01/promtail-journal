@@ -1,7 +1,7 @@
 # https://hub.docker.com/_/golang
-FROM golang:1.18.5-bullseye as build
+FROM golang:1.19.2-bullseye as build
 # https://github.com/grafana/loki/releases
-ENV LOKI_VERSION 2.6.1
+ENV LOKI_VERSION 2.7.0
 
 WORKDIR /usr/src/loki
 
@@ -14,7 +14,7 @@ RUN set -eux; \
         ; \
     git clone --depth 1 -b "v${LOKI_VERSION}" https://github.com/grafana/loki .; \
     make clean; \
-    make BUILD_IN_CONTAINER=false promtail
+    make BUILD_IN_CONTAINER=false PROMTAIL_JOURNAL_ENABLED=true promtail
 
 # https://hub.docker.com/_/debian
 FROM debian:bullseye-20221114-slim
