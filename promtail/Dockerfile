@@ -10,7 +10,7 @@ WORKDIR /usr/src/loki
 RUN set -eux; \
     apt-get update; \
     apt-get install -qy --no-install-recommends \ 
-        libsystemd-dev=247.3-7 \
+    libsystemd-dev=247.3-7+deb11u1 \
         ; \
     git clone --depth 1 -b "v${LOKI_VERSION}" https://github.com/grafana/loki .; \
     make clean; \
