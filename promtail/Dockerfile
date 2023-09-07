@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/golang
-FROM golang:1.19.2-bullseye as build
+FROM golang:1.21.1-bullseye as build
 # https://github.com/grafana/loki/releases
 ENV LOKI_VERSION 2.7.0
 
